@@ -60,9 +60,9 @@ function isFormValid() {
             tag.classList.add('input-tag-error')
             error.classList.remove('d-none');
             result = false;
-            if(input.validity.valueMissing) {
+            if (input.validity.valueMissing) {
                 error.textContent = 'This field is required';
-            } else if (input.validity.typeMismatch || input.validity.rangeUnderflow){
+            } else {
                 error.textContent = 'This field must be a positive number';   
             }
         }
