@@ -49,6 +49,12 @@ const completedResults = document.querySelector('#completed-results');
 function isFormValid() {
     let result = true; // to hold the final result
 
+    function showError(number, tag, error) {
+        number.classList.add('input-border-error')
+        tag.classList.add('input-tag-error')
+        error.classList.remove('d-none');
+    }
+
     for (let number of numberInputs){
         const input = number.querySelector('input');
         const tag = number.querySelector('.input-tag')
@@ -57,9 +63,7 @@ function isFormValid() {
             
         // to style the input & show the error message
         if (!input.checkValidity()) {
-            number.classList.add('input-border-error')
-            tag.classList.add('input-tag-error')
-            error.classList.remove('d-none');
+            showError(number, tag, error);
             if (input.validity.valueMissing) {
                 error.textContent = 'This field is required';
             } else {
@@ -68,28 +72,25 @@ function isFormValid() {
             result = false;
         }
 
-        // to block negative numbers
-        if (value < 0) {
-            number.classList.add('input-border-error')
-            tag.classList.add('input-tag-error')
-            error.classList.remove('d-none');
-            error.textContent = 'This field must be a positive number';  
+        // to block negative amounts
+        if (input.id === 'amount' && value < 0) {
+            showError(number, tag, error);
+            error.textContent = 'This field must be a positive number';
+            result = false;
         }
 
         // to block years lower than 1
-        if (input.id === 'term' && value === 0) {
-            number.classList.add('input-border-error')
-            tag.classList.add('input-tag-error')
-            error.classList.remove('d-none');
-            error.textContent = 'This field must be a number greater than or equal to 1';  
+        if (input.id === 'term' && value <= 0) {
+            showError(number, tag, error);
+            error.textContent = 'This field must be a number greater than or equal to 1';
+            result = false;
         }
 
         // to block percentages lower than 0.1 & higher than 100
         if (input.id === 'rate' && (value < 0.1 || value > 100))  {
-            number.classList.add('input-border-error')
-            tag.classList.add('input-tag-error')
-            error.classList.remove('d-none');
-            error.textContent = 'This field must be a number between 0.1-100';  
+            showError(number, tag, error);
+            error.textContent = 'This field must be a number between 0.1-100';
+            result = false;
         }
     }
 
@@ -118,7 +119,10 @@ for (let number of numberInputs){
 form.addEventListener('submit', function(e){
     e.preventDefault();
 
-    if (isFormValid()){
+    if (!isFormValid()){
+        emptyResults.classList.remove('d-none');
+        completedResults.classList.add('d-none');
+    } else {
         emptyResults.classList.add('d-none');
         completedResults.classList.remove('d-none');
 
@@ -162,7 +166,6 @@ clear.addEventListener('click', function(e){
         input.value = '';
         if (input.checked) input.checked = false;
 
-
         // to hide all errors
         const allErrors = document.querySelectorAll('.error');
         for (let error of allErrors) {
@@ -179,9 +182,9 @@ clear.addEventListener('click', function(e){
 
         repaymentLabel.classList.remove('radio-label-checked');
         interestLabel.classList.remove('radio-label-checked');
-        if (!radioError.classList.contains('d-none')) radioError.classList.add('d-none');
-        if (emptyResults.classList.contains('d-none')) emptyResults.classList.remove('d-none');
-        if (!completedResults.classList.contains('d-none')) completedResults.classList.add('d-none');
+        radioError.classList.add('d-none');
+        emptyResults.classList.remove('d-none');
+        completedResults.classList.add('d-none');
     }
 })
 
