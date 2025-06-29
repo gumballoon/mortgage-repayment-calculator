@@ -17,7 +17,7 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <title>Repayment Mortgage Calculator</title>
+    <title>Mortgage Repayment Calculator</title>
     <meta name="description" content="Frontend Mentor: Challenge #20">
 
 </head>
@@ -34,7 +34,7 @@
                 <label class="slate-700" for="amount">Mortgage Amount</label>
                 <div class="input-border number" title="Enter mortgage amount in pounds sterling" aria-label="Enter mortgage amount in pounds sterling">
                     <div class="slate-700 fw-700 input-tag input-tag-left">&pound;</div>
-                    <input type="number" name="amount" id="amount" required min="0" class="slate-900 fw-700">
+                    <input type="number" name="amount" id="amount" required min="0" step="any" class="slate-900 fw-700" autocomplete="off">
                 </div>
                 <p class="red rem-0_85 mb-0 mt-2 error d-none">This field is required</p>
 
@@ -42,7 +42,7 @@
                     <div class="col-xl-6">
                         <label class="slate-700" for="term">Mortgage Term</label>
                         <div class="input-border number" title="Enter mortgage term in years" aria-label="Enter mortgage term in years">
-                            <input type="number" name="term" id="term" required min="0" class="slate-900 fw-700 col-xl-4">
+                            <input type="number" name="term" id="term" required class="slate-900 fw-700 col-xl-4" autocomplete="off">
                             <div class="slate-700 fw-700 input-tag">years</div>
                         </div>
                         <p class="red rem-0_85 mb-0 mt-2 error d-none">This field is required</p>
@@ -51,7 +51,7 @@
                     <div class="col-xl-6">
                         <label class="slate-700" for="rate">Interest Rate</label>
                         <div class="input-border number" title="Enter interest rate percentage" aria-label="Enter interest rate percentage">
-                            <input type="number" name="rate" id="rate" required min="0" max="100" class="slate-900 fw-700 col-xl-4">
+                            <input type="number" name="rate" id="rate" required min="0" max="100" step="any" class="slate-900 fw-700 col-xl-4" autocomplete="off"> 
                             <div class="slate-700 fw-700 input-tag">&percnt;</div>
                         </div>
                         <p class="red rem-0_85 mb-0 mt-2 error d-none">This field is required</p>
@@ -105,10 +105,10 @@
     
                 <div class="results">
                     <p class="slate-300 mb-1">Your monthly repayments</p>
-                    <h3 id="monthly-repay" class="lime rem-2_5">£1,234.56</h3>
+                    <h3 id="monthly-repay" class="lime rem-2_5"></h3>
     
                     <p class="slate-300 mb-1">Total you'll repay over the term</p>
-                    <h2 id="total-repay" class="text-white">£123,456.78</h2>
+                    <h2 id="total-repay" class="text-white"></h2>
                 </div>
             </div>
         </section>

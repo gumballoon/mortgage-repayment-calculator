@@ -1,13 +1,7 @@
-const numberInputs = document.querySelectorAll('.number');
-
 // to style the background of INPUT-TAG when in focus
+const numberInputs = document.querySelectorAll('.number');
 for (let input of numberInputs){
-    let tag = ''; // to hold the INPUT-TAG of each input
-    for (i of input.children){
-        if (i.classList.contains('input-tag')){
-            tag = i;
-        }
-    }
+    const tag = input.querySelector('.input-tag');
 
     input.addEventListener('focusin', function(){
         tag.style.backgroundColor = 'hsl(61, 70%, 52%)';
@@ -27,12 +21,11 @@ for (let inputBorder of allInputBorders) {
     })
 }
 
+// to style the background of RADIO-LABEL when checked
 const radioInputs = document.querySelectorAll('input[type="radio"]');
 const repaymentLabel = document.querySelector('label[for="repayment"]');
 const interestLabel = document.querySelector('label[for="interest-only"]');
 const radioError = document.querySelector('#radio-error');
-
-// to style the background of RADIO-LABEL when checked
 for (radio of radioInputs){
     radio.addEventListener('change', function(){
         if(this.id === 'repayment'){
@@ -48,46 +41,33 @@ for (radio of radioInputs){
     })
 }
 
-// Form Validation //
-
+// to verify all constraints & apply the error styling
 const form = document.querySelector('form');
 const allInputs = form.elements;
 const emptyResults = document.querySelector('#empty-results');
 const completedResults = document.querySelector('#completed-results');
-
-// to verify all constraints & apply the error styling
 function isFormValid() {
-    let result = true; // to hold the final result (return true would break the code & not cover all inputs)
+    let result = true; // to hold the final result
 
     for (let number of numberInputs){
-
-        let input = ''; // to hold the INPUT
-        let tag = ''; // to hold the INPUT-TAG of each input
+        const input = number.querySelector('input');
+        const tag = number.querySelector('.input-tag')
+        const error = number.parentElement.querySelector('.error');
         
-        for (let i of number.children){
-            if (i.localName === 'input') input = i;
-            else if (i.classList.contains('input-tag')){
-                tag = i;
-            }
-        }
-
-        const error = number.nextElementSibling;
-
-        // if there is a value missing, style the input & show the error message
-        if(input.validity.valueMissing){
+    // if there is a value missing, style the input & show the error message
+    if (!input.checkValidity()) {
             number.classList.add('input-border-error')
             tag.classList.add('input-tag-error')
             error.classList.remove('d-none');
             result = false;
+            if(input.validity.valueMissing) {
+                error.textContent = 'This field is required';
+            } else if (input.validity.typeMismatch || input.validity.rangeUnderflow){
+                error.textContent = 'This field must be a positive number';   
+            }
         }
-
-        // to reset the display if the user starts typing
-        input.addEventListener('input', function(){
-            this.parentElement.classList.remove('input-border-error');
-            tag.classList.remove('input-tag-error')
-            error.classList.add('d-none');
-        })
     }
+
     // show the error message if one of the radio inputs isn't selected
     if (!radioInputs[0].checked && !radioInputs[1].checked){
         radioError.classList.remove('d-none');
@@ -97,6 +77,19 @@ function isFormValid() {
     return result;
 }
 
+// to reset the error display if the user starts typing
+for (let number of numberInputs){
+    const input = number.querySelector('input');
+    const tag = number.querySelector('.input-tag')
+    const error = number.parentElement.querySelector('.error');
+
+    input.addEventListener('input', function(){
+        this.parentElement.classList.remove('input-border-error');
+        tag.classList.remove('input-tag-error')
+        error.classList.add('d-none');
+    })
+}
+
 form.addEventListener('submit', function(e){
     e.preventDefault();
 
@@ -104,9 +97,12 @@ form.addEventListener('submit', function(e){
         emptyResults.classList.add('d-none');
         completedResults.classList.remove('d-none');
 
+        // to format the amount (ignore any commas)
         const amount = parseFloat(allInputs["amount"].value);
+
         // to get the total number of months (payments)
         const term = parseInt(allInputs["term"].value) * 12;
+
         // to get the monthly rate
         const rate = parseFloat(allInputs["rate"].value) / (100 * 12);
 
