@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+
+    <!-- GoogleFonts Link: https://fonts.google.com -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Repayment Mortgage Calculator</title>
+    <meta name="description" content="Frontend Mentor: Challenge #20">
+
+</head>
+
+<body>
+    <div id="herobox">
+        <div class="col-xl-6 m-xl-4 py-4 py-xl-0" id="form-text">
+            <div class="d-xl-flex align-items-center ">
+                <h1 class="slate-900 rem-1_5 fw-700 mt-3">Mortgage Calculator</h1>
+                <a href="#" class="slate-700 d-block ms-auto" id="clear" title="Clear all inputs" aria-label="Clear all inputs">Clear All</a>
+            </div>
+        
+            <form action="#" novalidate>
+                <label class="slate-700" for="amount">Mortgage Amount</label>
+                <div class="input-border number" title="Enter mortgage amount in pounds sterling" aria-label="Enter mortgage amount in pounds sterling">
+                    <div class="slate-700 fw-700 input-tag input-tag-left">&pound;</div>
+                    <input type="number" name="amount" id="amount" required min="0" class="slate-900 fw-700">
+                </div>
+                <p class="red rem-0_85 mb-0 mt-2 error d-none">This field is required</p>
+
+                <div class="d-xl-flex row">
+                    <div class="col-xl-6">
+                        <label class="slate-700" for="term">Mortgage Term</label>
+                        <div class="input-border number" title="Enter mortgage term in years" aria-label="Enter mortgage term in years">
+                            <input type="number" name="term" id="term" required min="0" class="slate-900 fw-700 col-xl-4">
+                            <div class="slate-700 fw-700 input-tag">years</div>
+                        </div>
+                        <p class="red rem-0_85 mb-0 mt-2 error d-none">This field is required</p>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <label class="slate-700" for="rate">Interest Rate</label>
+                        <div class="input-border number" title="Enter interest rate percentage" aria-label="Enter interest rate percentage">
+                            <input type="number" name="rate" id="rate" required min="0" max="100" class="slate-900 fw-700 col-xl-4">
+                            <div class="slate-700 fw-700 input-tag">&percnt;</div>
+                        </div>
+                        <p class="red rem-0_85 mb-0 mt-2 error d-none">This field is required</p>
+                    </div>
+                </div>
+
+                <label class="slate-700" for="type">Mortgage Type</label>
+                <div class="button-group mb-3">
+                    <label for="repayment" class="input-border radio-label" title="Repayment mortgage" aria-label="Repayment mortgage">
+                        <input type="radio" name="type" id="repayment">
+                        <div class="radio-circle"></div>
+                        <span class="slate-900 fw-700 ms-3">Repayment</span>
+                    </label>
+    
+                    <label for="interest-only" class="input-border radio-label mt-3" title="Interest only mortgage" aria-label="Interest only mortgage">
+                        <input type="radio" name="type" id="interest-only">
+                        <div class="radio-circle"></div>
+                        <span class="slate-900 fw-700 ms-3">Interest Only</span>
+                    </label>
+                    <p id="radio-error" class="red rem-0_85 mb-0 mt-2 error d-none">This field is required</p>
+                </div>
+    
+                <button type="submit" class="mt-2 mb-3 mb-xl-2" title="Calculate repayments" aria-label="Calculate repayments">
+                    <img src="assets/images/icon-calculator.svg" alt="icon-calculator" class="img-fluid">    
+                    <span class="slate-900 fw-700 ms-2">Calculate Repayments</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Empty results -->
+        <section id="empty-results" class="text-center col-xl-6 py-4 p-xl-4">
+            <div class="inner-section fw-300">
+                <img src="assets/images/illustration-empty.svg" alt="illustration-empty" class="img-fluid mx-auto">
+
+                <h2 class="text-white rem-1_5 my-3">Results shown here</h2>
+
+                <p class="slate-300 fw-300">
+                    Complete the form and click “calculate repayments” to see what your monthly repayments would be.
+                </p>
+            </div>
+        </section>
+    
+        <!-- Completed results -->
+        <section id="completed-results" class="text-left col-xl-6 py-4 p-xl-4 d-none">
+            <div class="inner-section fw-300">
+                <h2 class="text-white rem-1_5 mb-3">Your results</h2>
+
+                <p class="slate-300">
+                    Your results are shown below based on the information you provided. To adjust the results, edit the form and click “calculate repayments” again.
+                </p>
+    
+                <div class="results">
+                    <p class="slate-300 mb-1">Your monthly repayments</p>
+                    <h3 id="monthly-repay" class="lime rem-2_5">£1,234.56</h3>
+    
+                    <p class="slate-300 mb-1">Total you'll repay over the term</p>
+                    <h2 id="total-repay" class="text-white">£123,456.78</h2>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
