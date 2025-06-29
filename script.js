@@ -53,18 +53,43 @@ function isFormValid() {
         const input = number.querySelector('input');
         const tag = number.querySelector('.input-tag')
         const error = number.parentElement.querySelector('.error');
-        
-    // if there is a value missing, style the input & show the error message
-    if (!input.checkValidity()) {
+        const value = parseFloat(input.value);
+            
+        // to style the input & show the error message
+        if (!input.checkValidity()) {
             number.classList.add('input-border-error')
             tag.classList.add('input-tag-error')
             error.classList.remove('d-none');
-            result = false;
             if (input.validity.valueMissing) {
                 error.textContent = 'This field is required';
             } else {
-                error.textContent = 'This field must be a positive number';   
+                error.textContent = 'This field must be a positive number';  
             }
+            result = false;
+        }
+
+        // to block negative numbers
+        if (value < 0) {
+            number.classList.add('input-border-error')
+            tag.classList.add('input-tag-error')
+            error.classList.remove('d-none');
+            error.textContent = 'This field must be a positive number';  
+        }
+
+        // to block years lower than 1
+        if (input.id === 'term' && value === 0) {
+            number.classList.add('input-border-error')
+            tag.classList.add('input-tag-error')
+            error.classList.remove('d-none');
+            error.textContent = 'This field must be a number greater than or equal to 1';  
+        }
+
+        // to block percentages lower than 0.1 & higher than 100
+        if (input.id === 'rate' && (value < 0.1 || value > 100))  {
+            number.classList.add('input-border-error')
+            tag.classList.add('input-tag-error')
+            error.classList.remove('d-none');
+            error.textContent = 'This field must be a number between 0.1-100';  
         }
     }
 

@@ -34,7 +34,7 @@
                 <label class="slate-700" for="amount">Mortgage Amount</label>
                 <div class="input-border number" title="Enter mortgage amount in pounds sterling" aria-label="Enter mortgage amount in pounds sterling">
                     <div class="slate-700 fw-700 input-tag input-tag-left">&pound;</div>
-                    <input type="number" name="amount" id="amount" required min="0" step="any" class="slate-900 fw-700" autocomplete="off">
+                    <input type="text" inputmode="decimal" pattern="[0-9]*" name="amount" id="amount" required class="slate-900 fw-700" autocomplete="off">
                 </div>
                 <p class="red rem-0_85 mb-0 mt-2 error d-none">This field is required</p>
 
