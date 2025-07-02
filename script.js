@@ -154,6 +154,9 @@ form.addEventListener('submit', function(e){
             monthlyRepay.textContent = '£' + monthlyResult.toLocaleString('en-GB');
             totalRepay.textContent = '£' + totalResult.toLocaleString('en-GB');
         }
+
+        // to scroll to the results
+        completedResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 })
 
