@@ -61,36 +61,29 @@ function isFormValid() {
         const error = number.parentElement.querySelector('.error');
         const value = parseFloat(input.value);
             
-        // to style the input & show the error message
+        // to style the input & show a custom error message
         if (!input.checkValidity()) {
             showError(number, tag, error);
+            result = false;
             if (input.validity.valueMissing) {
+                input.value = '';
                 error.textContent = 'This field is required';
             } else {
-                error.textContent = 'This field must be a positive number';  
+                // for AMOUNT
+                error.textContent = 'This field must be a positive number';
+
+                if (input.id === 'term') {
+                    showError(number, tag, error);
+                    error.textContent = 'This field must be a number greater than or equal to 1';
+                    result = false;
+                } 
+                
+                else if (input.id === 'rate')  {
+                    showError(number, tag, error);
+                    error.textContent = 'This field must be a number between 0.1-100';
+                    result = false;
+                }
             }
-            result = false;
-        }
-
-        // to block negative amounts
-        if (input.id === 'amount' && value < 0) {
-            showError(number, tag, error);
-            error.textContent = 'This field must be a positive number';
-            result = false;
-        }
-
-        // to block years lower than 1
-        if (input.id === 'term' && value <= 0) {
-            showError(number, tag, error);
-            error.textContent = 'This field must be a number greater than or equal to 1';
-            result = false;
-        }
-
-        // to block percentages lower than 0.1 & higher than 100
-        if (input.id === 'rate' && (value < 0.1 || value > 100))  {
-            showError(number, tag, error);
-            error.textContent = 'This field must be a number between 0.1-100';
-            result = false;
         }
     }
 
