@@ -26,7 +26,7 @@ const radioInputs = document.querySelectorAll('input[type="radio"]');
 const repaymentLabel = document.querySelector('label[for="repayment"]');
 const interestLabel = document.querySelector('label[for="interest-only"]');
 const radioError = document.querySelector('#radio-error');
-for (radio of radioInputs){
+for (let radio of radioInputs){
     radio.addEventListener('change', function(){
         if(this.id === 'repayment'){
             repaymentLabel.classList.add('radio-label-checked');
@@ -59,7 +59,6 @@ function isFormValid() {
         const input = number.querySelector('input');
         const tag = number.querySelector('.input-tag')
         const error = number.parentElement.querySelector('.error');
-        const value = parseFloat(input.value);
             
         // to style the input & show a custom error message
         if (!input.checkValidity()) {
@@ -158,7 +157,7 @@ const clear = document.querySelector('#clear');
 // to clear the form
 clear.addEventListener('click', function(e){
     e.preventDefault();
-    for (input of allInputs){
+    for (let input of allInputs){
         input.value = '';
         if (input.checked) input.checked = false;
 

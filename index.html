@@ -23,16 +23,16 @@
 </head>
 
 <body>
-    <div id="herobox">
+    <main id="herobox">
         <div class="col-xl-6 m-xl-4 py-4 py-xl-0" id="form-text">
-            <div class="d-xl-flex align-items-center ">
+            <header class="d-xl-flex align-items-center ">
                 <h1 class="slate-900 rem-1_5 fw-700 mt-3">Mortgage Calculator</h1>
                 <a href="#" class="slate-700 d-block ms-auto" id="clear" title="Clear all inputs" aria-label="Clear all inputs">Clear All</a>
-            </div>
+            </header>
         
             <form action="#" novalidate>
                 <label class="slate-700" for="amount">Mortgage Amount</label>
-                <div class="input-border number" title="Enter mortgage amount in pounds sterling" aria-label="Enter mortgage amount in pounds sterling">
+                <div role="form" class="input-border number" title="Enter mortgage amount in pounds sterling" aria-label="Enter mortgage amount in pounds sterling">
                     <div class="slate-700 fw-700 input-tag input-tag-left">&pound;</div>
                     <input type="number" min="0" step="any" name="amount" id="amount" required class="slate-900 fw-700" autocomplete="off">
                 </div>
@@ -41,7 +41,7 @@
                 <div class="d-xl-flex row">
                     <div class="col-xl-6">
                         <label class="slate-700" for="term">Mortgage Term</label>
-                        <div class="input-border number" title="Enter mortgage term in years" aria-label="Enter mortgage term in years">
+                        <div role="form" class="input-border number" title="Enter mortgage term in years" aria-label="Enter mortgage term in years">
                             <input type="number" min="1" step="any" name="term" id="term" required class="slate-900 fw-700 col-xl-4" autocomplete="off">
                             <div class="slate-700 fw-700 input-tag">years</div>
                         </div>
@@ -50,7 +50,7 @@
 
                     <div class="col-xl-6">
                         <label class="slate-700" for="rate">Interest Rate</label>
-                        <div class="input-border number" title="Enter interest rate percentage" aria-label="Enter interest rate percentage">
+                        <div role="form" class="input-border number" title="Enter interest rate percentage" aria-label="Enter interest rate percentage">
                             <input type="number" min="0" max="100" step="any" name="rate" id="rate" required class="slate-900 fw-700 col-xl-4" autocomplete="off"> 
                             <div class="slate-700 fw-700 input-tag">&percnt;</div>
                         </div>
@@ -62,13 +62,13 @@
                 <div class="button-group mb-3">
                     <label for="repayment" class="input-border radio-label" title="Repayment mortgage" aria-label="Repayment mortgage">
                         <input type="radio" name="type" id="repayment">
-                        <div class="radio-circle"></div>
+                        <span class="radio-circle"></span>
                         <span class="slate-900 fw-700 ms-3">Repayment</span>
                     </label>
     
                     <label for="interest-only" class="input-border radio-label mt-3" title="Interest only mortgage" aria-label="Interest only mortgage">
                         <input type="radio" name="type" id="interest-only">
-                        <div class="radio-circle"></div>
+                        <span class="radio-circle"></span>
                         <span class="slate-900 fw-700 ms-3">Interest Only</span>
                     </label>
                     <p id="radio-error" class="red rem-0_85 mb-0 mt-2 error d-none">This field is required</p>
@@ -112,7 +112,7 @@
                 </div>
             </div>
         </section>
-    </div>
+    </main>
 
     <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

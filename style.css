@@ -116,7 +116,7 @@ input[type="radio"] {
     border: 1.5px solid hsl(61, 70%, 52%);
 }
 
-input[type="radio"]:checked+div {
+input[type="radio"]:checked+span {
     background-color: hsl(61, 70%, 52%);
     outline-color: hsl(61, 70%, 52%);
 }
